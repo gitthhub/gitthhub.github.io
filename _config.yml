@@ -11,7 +11,7 @@ github_repo: "https://github.com/gitthhub/gitthhub.github.io.git" # you code rep
 
 # Sidebar settings
 sidebar: true                           # whether or not using Sidebar.
-sidebar-about-description: "Busy to die, or busy to live."
+sidebar-about-description: "Counterfeit coder."
 sidebar-avatar: /img/avatar.png      # use absolute URL, seeing it's used in both `/` and `/about/`
 
 
