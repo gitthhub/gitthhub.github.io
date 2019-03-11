@@ -1,4 +1,4 @@
-{
+/* {
   "name": "BY Blog",
   "short_name": "BY Blog",
   "description": "A personal blog by engineer",
@@ -16,4 +16,4 @@
   "start_url": "/",
   "display": "standalone",
   "orientation": "portrait"
-}
+} */
