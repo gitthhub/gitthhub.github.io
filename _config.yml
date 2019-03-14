@@ -4,7 +4,7 @@ SEOTitle: vhpg的博客 | vhpg's Blog      # 显示在浏览器搜索框上的�
 header-img: img/wallpaper.jpeg
 email: vhpg94@gmail.com
 description: "You got a dream, you gotta to protect it."
-keyword: "AI, Deep Learning, Algorithm, Objection Detection, Others"  # Tags
+keyword: "Machine Learning, Deep Learning, Algorithm, Objection Detection, Mathematics, Essay, Others"  # Tags
 url: "http://gitthhub.github.io"          # your host, for absolute URL
 baseurl: ""      # for example, '/blog' if your blog hosted on 'host/blog'
 github_repo: "https://github.com/gitthhub/gitthhub.github.io.git" # you code repository
