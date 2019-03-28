@@ -15,7 +15,7 @@ tags:
 #### 1. Introduce
   Inception v1模型是由2015年发表在CVPR上的[Going Deeper with Convolutions](https://www.cs.unc.edu/~wliu/papers/GoogLeNet.pdf)文章中提出的，文章中首次提出了Inception结构，并把由该结构组成的网络称为GoogLeNet，该网络获得了ILSVRC-2014的Classification任务的冠军。
 
-  GoogLeNet达到了22层，在当时应该是最深的网络，由于精心设计的网络结构，其参数数量只有AlexNet的8层网络的1/12，并且要比AlexNet更为精确。
+  GoogLeNet达到了22层，在当时应该是最深的网络，由于精心设计的网络结构，其参数数量只有AlexNet的8层网络的1/12，约为500w，并且要比AlexNet更为精确。
 
   作者的motivation是如何在增大网络(depth and width)的同时，不增加运算量。
   实验表明，网络越大，效果越好。但是直接加大网络规模会带来两个明显的问题：
@@ -65,6 +65,8 @@ tags:
 
   * 虽然没有使用全连接层，但是网络中依然使用了dropout层，作者认为这很有必要；
 
+  * 网络中也使用了LRN；
+
   由于网络层数较深，所以会带来梯度消失的问题。
   为了应对该问题，在训练阶段，作者为网络添加了辅助分类器，即使用网络中间某层的feature map进行分类，计算得到的loss以一定权重添加到总的loss中用于训练，在测试阶段则丢弃这些辅助分类器。
 
@@ -74,9 +76,25 @@ tags:
 
 #### 4. Training
   * 输入图像：`224*224*3`，均值为0；
-  *
+  * momentum = 0.9；
+  * fixed lr (decreease lr by 4% every 8 epochs)；
+  * 图像采样方法：从图像中采样一定大小(8%-100%)的一定长宽比(3/4, 4/3)的块。
 
 #### 5. Testing
+  作者在测试时使用了以下策略，以提高模型性能：
+  * 独立训练7个GoogLeNet模型(6小+1大)，模型的参数配置都一样，区别仅在图像采样策略和图像的输入次序；
+
+  * 相比于AlexNet，这里在测试时采取的crop更多，策略为：将一幅图像分别resize到四个尺度`256, 288, 320, 352`，然后从图像中取左/中/右三个正方形块(若是h>w的图像，取上/中/下三块)，然后每个正方形块再取四角和中心`224*224`的区域和将该正方形块resize到`224×224`的块，所有这些块再取其水平镜像，所以一幅图像总计取`4*3*6*2=144`个crops用于测试；
+
+  * 最终的分类结果是多干crops和多个model分类结果的均值；
+
+  下图对比分析了crops和model给模型性能带来的提升：
+  ![Selection_003](/assets/Selection_003_4zuywb8bl.png)
+
+  下图是ILSVRC-2014的Classification任务的前三名和往年比赛冠军的对比，其中的SuperVision使用的是AlexNet网络，Clarifai使用的是ZFNet(ZFNet论文中貌似没有在ILSVRC-2013比赛中的成绩数据?)：
+  ![Selection_001](/assets/Selection_001_jo693tilt.png)
+
+  *暂时略过Localization部分*
 
 #### Reference
 [Inception v1: GoogLeNet](https://www.cs.unc.edu/~wliu/papers/GoogLeNet.pdf)
