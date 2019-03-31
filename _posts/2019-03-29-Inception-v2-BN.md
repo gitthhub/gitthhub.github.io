@@ -1,6 +1,6 @@
 ---
 layout:     post
-title:      CNN Model - Inception v2: Batch Normalization
+title:      CNN Model - Inception v2--Batch Normalization
 subtitle:   论文分析
 date:       2019-03-29
 author:     vhpg

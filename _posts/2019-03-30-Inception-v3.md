@@ -1,6 +1,6 @@
 ---
 layout:     post
-title:      CNN Model - Inception v3: Rethinking the Inception
+title:      CNN Model - Inception v3--Rethinking the Inception
 subtitle:   论文分析
 date:       2019-03-30
 author:     vhpg

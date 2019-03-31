@@ -1,6 +1,6 @@
 ---
 layout:     post
-title:      CNN Model - Inception v1: GoogLeNet
+title:      CNN Model - Inception v1--GoogLeNet
 subtitle:   论文分析
 date:       2019-03-28
 author:     vhpg
