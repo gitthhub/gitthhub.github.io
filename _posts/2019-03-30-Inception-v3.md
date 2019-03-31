@@ -2,7 +2,7 @@
 layout:     post
 title:      CNN Model - Inception v3: Rethinking the Inception
 subtitle:   论文分析
-date:       2019-03-29
+date:       2019-03-30
 author:     vhpg
 header-img: img/placeholder_img.png
 catalog: true
@@ -30,7 +30,7 @@ tags:
   * AlexNet       60  million   8  layers
   * Inception v1  5   million   22 layers     1.5 billion
   * VGGNet        144 million   19 layers
-  * Inception v2  25  million   42 layers     4   billion
+  * Inception v3  25  million   42 layers     4.8 billion
   ```
   引用[这里](https://blog.csdn.net/u010402786/article/details/52433324)的一张图片做个简单的小结，这张图总结的并不完整，等这方面的论文看得差不多了再进行更新：
   ![2019-03-30_092151](/assets/2019-03-30_092151.png)
@@ -96,15 +96,37 @@ tags:
   * 上述的卷积池化并行的池化操作；
   * 最后一层使用的是`8*8`的池化操作；
   ![2019-03-30_103722](/assets/2019-03-30_103722.png)
-  另外需要说明：
-  * 该网络结构被作者称为`Inception v2`；
-  * 后面有根据该网络结构的一些改进，最优改进`Inception v2 + BN-auxiliary`被作者称为`Inception v3`；
 
 #### 6. Model Regularization via Label Smoothing
   作者提出了一个正则化分类层的机制：在训练阶段通过估计标签失活的边缘影响来正则化分类器层。
   这部分没看懂，后续再补充。
 
+#### 7. Training
+  * using TensorFlow, traing 50 Models
+  * batch=32, epoch=100
+  * early: momentum=0.9, decay=0.9
+  * best: RMSProp  decay=0.9, ε=1.0
+  * lr = 0.045  decay every 2 epoch using exp rate of 0.94
+  * Gradient clipping with threshold 2.0 ??
+
+#### 8. Testing
+  作者首先分析了输入图像大小和模型大小的关系。
+  通过调整第一层卷积的步长和第二层的池化，可得到`79*79, 151*151, 299*299`三种感受野的网络，实验发现，网络对这三种情况的性能很接近，也即：
+  **低分辨率的图像并不代表要用较小的网络**。
+
+  不同Inception结构网络在**ILSVRC-2012 validation set**上的性能如下表，需要注意以下几点：
+  * 网络中的测试为**Single crop**；
+  * 网络中对Inception-v3-basic的改进，每一项改进都是在前一项基础上的叠加；
+  * **BN-auxiliary**指的是辅助分类器的卷积和全连接层都使用BN；
+  * 最下面一栏性能最好的改进版，为最终的**Inception v3**网络；
+  ![2019-03-31_090520](/assets/2019-03-31_090520_a3uqxoe64.png)
+
+  **Single-model Multi-crop**的结果对比如下表：
+  ![2019-03-31_091721](/assets/2019-03-31_091721.png)
+
+  **Multi-model Multi-crop**的对比结果如下表：
+  **有的模型的评估结果貌似是在testing set上的？？**
+  ![2019-03-31_091735](/assets/2019-03-31_091735.png)
+
 #### Reference
 [Inception v3: Rethinking the Inception](https://www.cv-foundation.org/openaccess/content_cvpr_2016/papers/Szegedy_Rethinking_the_Inception_CVPR_2016_paper.pdf)
-
-[图片来源](https://blog.csdn.net/u010402786/article/details/52433324)
