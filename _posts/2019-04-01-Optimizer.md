@@ -17,6 +17,7 @@ tags:
 
 #### 1. SGD
 
+##### 原理
 
 
 [Reference](http://www.cs.toronto.edu/~tijmen/csc321/slides/lecture_slides_lec6.pdf)
@@ -29,6 +30,8 @@ tags:
 
 
 #### 3. Adagrad
+
+
 
 
 #### 4. Adadelta
