@@ -2,7 +2,7 @@
 layout:     post
 title:      Deep Learning - Optimization
 subtitle:   深度学习基础
-date:       2019-04-01
+date:       2019-04-03
 author:     vhpg
 header-img: img/placeholder_img.png
 catalog: true
@@ -13,6 +13,7 @@ tags:
     - Mathematics
 ---
 > 本篇文章观点仅限于目前的理解，后续若有新的理解，还会继续更新。
+
 > 文中编辑的公式，在网页上查看会有问题，可使用Atom+MarkDown插件查看(KaTex)
 
 #### 0. Introduce
