@@ -1,7 +1,7 @@
 ---
 layout:     post
 title:      Deep Learning - Receptive Field
-subtitle:   论文分析
+subtitle:   深度学习基础
 date:       2019-04-24
 author:     vhpg
 header-img: img/placeholder_img.png
