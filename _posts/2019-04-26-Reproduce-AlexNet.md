@@ -54,13 +54,13 @@ def AlexNet(img_shape=(227, 227, 3), num_classes=1000, weights='bvlc_alexnet.npy
     model = Model(input, fc8)
 ```
 这里要注意以下几点：
-* 输入图片大小应为`227*227*3`，通道顺序为`BGR`论文中的`224*224*3`貌似有误；
+* 输入图片大小应为`227*227*3`，通道顺序为`BGR`，论文中的`224*224*3`貌似有误；
 
 * AlexNet是最早使用Group Convolution的网络，这里在使用tf.Keras构造Group Convolution时，使用了TensorFlow的`tf.split()`函数，由于TensorFlow构造的是静态图模型(tf.split()返回的只是一个op)，而tf.Keras构造的是动态图模型(返回的是运行后的tensor)，所以要将`tf.split()`使用Keras的`Lambda`函数包装一下，以直接获得运算结果(或者说，只要是在Keras中使用tf中的操作，都需要包装一下)；
 
 * AlexNet中使用的LRN操作现在基本已经被更好用的BN代替，但是由于预训练权重是在LRN操作的基础上进行训练的，这里换成BN后使用预训练权重效果会差很多，所以要使用BN，还需要对网络重新训练；
 
-* AlexNet中使用了Dropout操作以防止训练过程中过拟合，但Dropout操作在测试时不应该再使用，Keras在测试阶段会自动停用掉Dropout层，所以这里写不写Dropout层都可以。
+* AlexNet中使用了Dropout操作以防止训练过程中过拟合，但Dropout操作在测试时不应该再使用，Keras在测试阶段会自动停用掉Dropout层，所以这里写不写Dropout层都可以。(在AlexNet论文中，测试阶段时，每个神经元的输出乘以0.5，目的是将多个模型的输出取平均？)
 
 #### Load Pre-trained Weights
 [预训练权重](http://www.cs.toronto.edu/~guerzhoy/tf_alexnet/)是`.npy`格式的文件，在搭建好网络后可根据每一层的名字把权重加载进去，代码如下：
@@ -171,6 +171,15 @@ ILSVRC竞赛中，每个synsets的信息都被存储在synsets数组中，这些
 事实上，Keras网络最终输出的1000维向量所对应的物体类别顺序与[synset_words.txt](https://github.com/HoldenCaulfieldRye/caffe/blob/master/data/ilsvrc12/synset_words.txt)文件中的顺序一致，比如`Keras_ID=1`对应的是该文件中的第一行`WNID=n01440764`，而`ILSVRC2012_ID=1`或`WNID=n02119789`在`synset_words.txt`中对应的是`Keras_ID=279`。
 
 综上，对`meta.mat`文件进行预处理时，需要通过`WIND`将`ILSVRC2012_ID`映射到`Keras_ID`，具体代码可参考[这里](https://github.com/calebrob6/imagenet_validation/blob/master/1.%20Preprocess%20ImageNet%20validation%20set.ipynb)，清楚了上述过程后，这部分代码就不难理解。
+
+#### 227×227 or 224×224
+![2019-04-25_081113](/assets/2019-04-25_081113.png)
+
+* 根据上述公式计算AlexNet的Conv1的输出shape(`k=11, p=0, s=4, n_out=55`)，可以推出，输入的shape一定为`227×227`;
+
+* 这里在复现时使用的预训练权重及网络结构是由[tornoto大学](http://www.cs.toronto.edu/~guerzhoy/tf_alexnet/)相应的网站提供的，它对AlexNet的Conv1的配置为`k=11, p=1, s=4`，这也导致了后面各层输出shape的变化，与论文中的AlexNet结构稍有区别:
+
+![Screenshot from 2019-05-07 19-07-05](/assets/Screenshot%20from%202019-05-07%2019-07-05.png)
 
 #### Conclusion
 以上简单总结了AlexNet的复现过程。
