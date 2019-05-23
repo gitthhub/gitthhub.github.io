@@ -8,4 +8,5 @@ header-img: img/placeholder_img.png
 catalog: true
 tags:
     - Deep Learning
+    - Object Detection
 ---

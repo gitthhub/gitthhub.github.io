@@ -8,7 +8,7 @@ header-img: img/placeholder_img.png
 catalog: true
 tags:
     - Deep Learning
-    - Objection Detection
+    - Object Detection
 ---
 > 本篇文章观点仅限于目前的理解，后续若有新的理解，还会继续更新。
 
