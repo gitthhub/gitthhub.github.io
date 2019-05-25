@@ -191,6 +191,9 @@ MS COCO数据集的评估标准比PASCAL VOC严格许多，PASCAL VOC中，IoU>0
 
 图中还有一个AR的指标用以计算模型的召回率，这些指标都可以通过COCO提供的API来完成计算：https://github.com/cocodataset/cocoapi
 
+下图是比较详细的各种评测标准的总结：
+![2019-05-23_092907](/assets/2019-05-23_092907.png)
+
 #### 3. Model Performance Criteria
 
 ##### FLOPs
@@ -222,3 +225,4 @@ Paper中较常用的单位为GFLOPs:10亿次浮点运算(1 GFLOPs = 10^9 FLOPs)�
 [Recall & precision et al](https://charleshm.github.io/2016/03/Model-Performance/)
 [mAP](https://datascience.stackexchange.com/questions/25119/how-to-calculate-map-for-detection-task-for-the-pascal-voc-challenge)
 [FLOPs and Parameters](https://www.zhihu.com/question/65305385)
+[Object Detection Survey](https://arxiv.org/pdf/1809.02165v1.pdf)
