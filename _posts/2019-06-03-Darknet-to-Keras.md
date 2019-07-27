@@ -81,14 +81,15 @@ def print_structure(weight_file_path):
 
         for layer, g in f.items():
             print("  {}".format(layer))
-            print("    Attributes:")
+            print("    Attributes:")         # 权重名称及一些参数配置属性
             for key, value in g.attrs.items():
                 print("      {}: {}".format(key, value))
 
             print("    Dataset:")
             for p_name in g.keys():
                 param = g[p_name]
-                print("      {}: {}".format(p_name, param.shape))
+                for k_name in param.keys():
+                    print("      {}/{}: {}".format(p_name, k_name, param.get(k_name)[:]))
     finally:
         f.close()
 ```
