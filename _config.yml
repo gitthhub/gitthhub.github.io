@@ -5,7 +5,7 @@ header-img: img/wallpaper.jpeg
 email: vhpg94@gmail.com
 description: "You got a dream, you gotta to protect it."
 keyword: "Machine Learning, Deep Learning, Algorithm, Object Detection,
-          CNN Model, Model Compression and Acceleration, Mathematics, Essay, Others"  # Tags
+          CNN Model, Model Compression, Model Acceleration, Mathematics, Essay, Others"  # Tags
 url: "http://gitthhub.github.io"          # your host, for absolute URL
 baseurl: ""      # for example, '/blog' if your blog hosted on 'host/blog'
 github_repo: "https://github.com/gitthhub/gitthhub.github.io.git" # you code repository
