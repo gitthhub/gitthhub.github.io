@@ -1,7 +1,7 @@
 ---
 layout:     post
 title:      OpenCV Notes
-subtitle:   论文分析
+subtitle:   OpenCV 使用笔记
 date:       2019-08-21
 author:     vhpg
 header-img: img/placeholder_img.png
