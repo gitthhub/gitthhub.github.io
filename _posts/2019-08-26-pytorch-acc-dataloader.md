@@ -1,6 +1,6 @@
 ---
 layout:     post
-title:      PyTorch: Accelerate DataLoader
+title:      PyTorch - Accelerate DataLoader
 subtitle:   PyTorch使用笔记
 date:       2019-08-26
 author:     vhpg
