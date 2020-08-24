@@ -65,6 +65,28 @@ MobileNet v2总体的网络结构如下，其中，t为扩张系数，c为channe
 深度可分离卷积使得网络性能在下降不大的情况下参数数量大量减少且速度有较大提升，MobileNet充分体现了这一优势，这里的实验部分不再赘述，后期会尝试复现其结果。
 
 
+#### 5. MobileNet V3
+使用神经结构搜索(NAS)来找出MobileNet V3的结构
+
+0.网络的架构基于NAS实现的MnasNet（效果比MobileNetV2好）
+
+1.引入MobileNetV1的深度可分离卷积
+
+2.引入MobileNetV2的具有线性瓶颈的倒残差结构
+
+3.引入基于squeeze and excitation结构的轻量级注意力模型(SE)
+
+4.使用了一种新的激活函数h-swish(x)
+
+swish函数(搜索出来的？)
+![](image/2020-08-07-16-14-20.png)
+
+因为swish在嵌入式设备上不友好，因此给出了hard-swish
+![](image/2020-08-07-16-14-52.png)
+
+5.网络结构搜索中，结合两种技术：资源受限的NAS（platform-aware NAS）与NetAdapt
+
+6.修改了MobileNetV2网络端部最后阶段
 
 #### Reference
 [MobileNet v1](https://arxiv.org/pdf/1704.04861.pdf)

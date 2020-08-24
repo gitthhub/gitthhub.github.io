@@ -13,7 +13,7 @@ tags:
 > 本篇文章观点仅限于目前的理解，后续若有新的理解，还会继续更新。
 
 #### Introduce
-ShuffleNet v1是2018年CVPR上的一篇论文中提出的，作者团队为Face++(旷视科技)，它提出于MobileNet v1之后，它的目的与MobileNet类似，主要是想降低计算量，便于将网络部署到计算能力有限的中断设备上。
+ShuffleNet v1是2018年CVPR上的一篇论文中提出的，作者团队为Face++(旷视科技)，它提出于MobileNet v1之后，它的目的与MobileNet类似，主要是想降低计算量，便于将网络部署到计算能力有限的终端设备上。
 
 Google对从2015年开始提出的Inception网络不断优化，在2017年提出的`Xception`网络引入了`Depth-wise Separable Convolution`，将卷积分为`Depth-wise Convolution`和`Point-wise Convolution`两个步骤大大降低了参数量和计算量；Facebook提出的`ResNeXt`网络则是对`ResNet`改进(残差网络的三篇论文都有`He`参与，只是分别在微软和Facebook)，提出了`Group Convolution`，即首先使用`Point-wise Convolution`进行降维，再对channel分组以进行`Gropu Convolution`，最后再使用`Point-wise Convolution`升维至所需维度，这种方法同样可以减少参数量和计算量，并且这种两端大(channel多)中间小(channel少)的设计通常被称为`bottleneck`，目前这种设计已经被证明能够较好提取图像特征。
 
